@@ -1,6 +1,7 @@
 package ru.pokhodai.calendar.view
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
@@ -17,8 +18,15 @@ class MonthView @JvmOverloads constructor(
     var month: Month? = null
         set(value) {
             field = value
-
         }
+
+
+
+
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+    }
 
 
 

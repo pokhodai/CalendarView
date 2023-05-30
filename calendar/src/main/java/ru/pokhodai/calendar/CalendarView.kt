@@ -13,7 +13,6 @@ import ru.pokhodai.calendar.databinding.ViewCalendarBinding
 import ru.pokhodai.calendar.generator.GeneratorCalendar
 import ru.pokhodai.calendar.models.Month
 
-
 class CalendarView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
