@@ -1,38 +1,63 @@
 package ru.pokhodai.calendar
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.util.Log
+import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textview.MaterialTextView
 import ru.pokhodai.calendar.adapter.CalendarAdapter
+import ru.pokhodai.calendar.databinding.ViewCalendarBinding
+import ru.pokhodai.calendar.generator.GeneratorCalendar
+import ru.pokhodai.calendar.models.Month
+
 
 class CalendarView @JvmOverloads constructor(
     context: Context,
-    private val attrs: AttributeSet? = null,
-    private val defStyleAttr: Int = 0
-): LinearLayout(context, attrs, defStyleAttr)  {
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+): LinearLayout(context, attrs, defStyleAttr) {
 
-    private var recyclerCalendarView: RecyclerView? = null
-    private var titleMonthTextView: MaterialTextView? = null
-    private val adapterCalendar: CalendarAdapter = CalendarAdapter()
+    private val binding = ViewCalendarBinding
+        .inflate(LayoutInflater.from(context), this)
+
+    private val generatorCalendar by lazy { GeneratorCalendar() }
+
+    private val adapterCalendar by lazy { CalendarAdapter() }
 
     init {
-        setSettingsCalendarView()
+        this.orientation = VERTICAL
+        val a =
+            context.theme.obtainStyledAttributes(
+                attrs,
+                R.styleable.CustomCalendarView,
+                defStyleAttr,
+                0
+            )
+        setAttrs(a)
+        initAdapter()
+        setListeners()
+        generatorCalendar.primaryGeneratorCalendar()
+    }
 
-        initRecyclerView()
-        initTitleMonthTextView()
+    private fun setAttrs(a: TypedArray) {
 
-        addViewInCalendarView()
+    }
 
-        setAttrs()
+    private fun initAdapter() {
+        binding.rvCalendar.adapter = adapterCalendar
+    }
 
-        setAdapter()
+    private fun setListeners() {
+        generatorCalendar.onCalendarListListener {
+            setAdapter(it)
+        }
+    }
+
+    private fun setAdapter(list: List<Month>) {
+        adapterCalendar.submitList(list)
     }
 
     override fun onSaveInstanceState(): Parcelable {
@@ -48,44 +73,9 @@ class CalendarView @JvmOverloads constructor(
         super.onRestoreInstanceState(restoreState)
     }
 
-    private fun setAttrs() {
-        val a =
-            context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.CustomCalendarView,
-                defStyleAttr,
-                0
-            )
-
-    }
-
-    private fun setSettingsCalendarView() {
-        this.orientation = VERTICAL
-    }
-
-    private fun initRecyclerView() {
-        recyclerCalendarView = RecyclerView(context).apply {
-            orientation = HORIZONTAL
-            layoutManager = LinearLayoutManager(context)
-        }
-    }
-
-    private fun initTitleMonthTextView() {
-        titleMonthTextView = MaterialTextView(context)
-    }
-
-    private fun addViewInCalendarView() {
-        this.addView(titleMonthTextView)
-        this.addView(recyclerCalendarView)
-    }
-
-    private fun setAdapter() {
-        recyclerCalendarView?.adapter = adapterCalendar
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        recyclerCalendarView = null
-        titleMonthTextView = null
+        this.removeAllViews()
+        generatorCalendar.removeCalendarListListener()
     }
 }

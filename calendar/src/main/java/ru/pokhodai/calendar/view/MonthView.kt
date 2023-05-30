@@ -1,7 +1,9 @@
 package ru.pokhodai.calendar.view
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import ru.pokhodai.calendar.models.Day
 import ru.pokhodai.calendar.models.Month
@@ -14,6 +16,7 @@ class MonthView @JvmOverloads constructor(
 
     var month: Month? = null
         set(value) {
+            field = value
 
         }
 
