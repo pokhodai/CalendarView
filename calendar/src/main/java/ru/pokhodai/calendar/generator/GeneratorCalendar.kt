@@ -1,9 +1,8 @@
 package ru.pokhodai.calendar.generator
 
-import android.util.Log
 import ru.pokhodai.calendar.models.Day
 import ru.pokhodai.calendar.models.Month
-import ru.pokhodai.calendar.utils.linkedListOf
+import ru.pokhodai.calendar.extensions.linkedListOf
 import java.time.DayOfWeek
 import java.time.Duration
 import java.time.LocalDateTime

@@ -2,6 +2,18 @@
 <resources>
 
     <declare-styleable name="CustomCalendarView">
-        <attr name="title" format="string" localization="suggested" />
+        <attr name="textAppearanceTitleMonth" format="reference" />
+        <attr name="textAppearanceDayOfMonth" format="reference" />
+        <attr name="textAppearanceDayNonMonth" format="reference" />
+        <attr name="colorPreviousIcon" format="reference" />
+        <attr name="colorNextIcon" format="reference" />
+        <attr name="drawablePreviousIcon" format="reference" />
+        <attr name="drawableNextIcon" format="reference" />
+        <attr name="colorFocusDay" format="reference" />
+        <attr name="colorToday" format="reference" />
+        <attr name="drawableFocus" format="reference" />
+        <attr name="drawableToday" format="reference" />
+        <attr name="isVisiblePreviousAndNextIcon" format="boolean" />
+        <attr name="isVisibleDayNonMonth" format="boolean" />
     </declare-styleable>
 </resources>
