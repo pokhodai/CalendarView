@@ -1,0 +1,26 @@
+import com.custom.calendar.buildscr.Libs
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../common.gradle'
+
+android {
+    namespace 'com.custom.calendar.calendaview'
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation Libs.core_ktx
+    implementation Libs.x_android_compat
+    implementation Libs.com_android_material
+    implementation Libs.x_android_constraint_layout
+
+    implementation Libs.x_android_recycler_view
+    coreLibraryDesugaring Libs.core_desugaring
+}

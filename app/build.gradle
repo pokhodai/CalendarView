@@ -1,0 +1,22 @@
+import com.custom.calendar.buildscr.Libs
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../common.gradle'
+
+android {
+    namespace 'com.custom.calendar.view'
+
+    defaultConfig {
+        applicationId "com.custom.calendar.view"
+    }
+}
+
+dependencies {
+    implementation Libs.core_ktx
+    implementation Libs.com_android_material
+    implementation Libs.x_android_compat
+}
